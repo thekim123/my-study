@@ -1,5 +1,8 @@
 [
   "obsidian-git",
   "obsidian-excalidraw-plugin",
-  "dataview"
+  "dataview",
+  "tag-wrangler",
+  "obsidian-tasks-plugin",
+  "templater-obsidian"
 ]
