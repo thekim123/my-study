@@ -13,15 +13,28 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Welcome.md",
+                "file": "자료구조/다항식.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Welcome"
+              "title": "다항식"
+            }
+          },
+          {
+            "id": "41605afa0e4757af",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "자료구조/Drawing 2024-11-29 22.15.12.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "Drawing 2024-11-29 22.15.12.excalidraw"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -176,9 +189,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "0ff83682568dbfdc",
+  "active": "41605afa0e4757af",
   "lastOpenFiles": [
-    "자료구조/Untitled.md",
+    "자료구조/다항식.md",
+    "자료구조/Drawing 2024-11-29 22.15.12.excalidraw.md",
     "Welcome.md",
     "자료구조"
   ]
