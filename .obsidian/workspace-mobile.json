@@ -11,10 +11,12 @@
             "id": "3ded0dd8f7344bd8",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
+              "type": "excalidraw",
+              "state": {
+                "file": "자료구조/Drawing 2024-11-29 22.15.12.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "Drawing 2024-11-29 22.15.12.excalidraw"
             }
           }
         ]
@@ -91,6 +93,7 @@
         "state": {
           "type": "backlink",
           "state": {
+            "file": "자료구조/Drawing 2024-11-29 22.15.12.excalidraw.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -109,6 +112,7 @@
         "state": {
           "type": "outgoing-link",
           "state": {
+            "file": "자료구조/Drawing 2024-11-29 22.15.12.excalidraw.md",
             "linksCollapsed": false,
             "unlinkedCollapsed": true
           },
@@ -121,7 +125,9 @@
         "type": "leaf",
         "state": {
           "type": "outline",
-          "state": {},
+          "state": {
+            "file": "자료구조/Drawing 2024-11-29 22.15.12.excalidraw.md"
+          },
           "icon": "lucide-list",
           "title": "Outline"
         }
@@ -136,7 +142,10 @@
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "obsidian-git:Open Git source control": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false,
+      "templater-obsidian:Templater": false
     }
   },
   "active": "3ded0dd8f7344bd8",
