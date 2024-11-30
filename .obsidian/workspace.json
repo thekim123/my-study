@@ -46,9 +46,21 @@
               "icon": "lucide-file",
               "title": "02. 희소 다항식"
             }
+          },
+          {
+            "id": "365f1b6d0b0a7620",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "자료구조/draw/행렬.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "행렬.excalidraw"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -203,12 +215,14 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "e442ec71d7e8015b",
+  "active": "365f1b6d0b0a7620",
   "lastOpenFiles": [
-    "자료구조/01. 다항식.md",
     "자료구조/draw/다항식그려보기.excalidraw.md",
-    "자료구조/draw/희소다항식그려보기.excalidraw.md",
+    "자료구조/03. 행렬.md",
+    "자료구조/draw/행렬.excalidraw.md",
     "자료구조/02. 희소 다항식.md",
+    "자료구조/01. 다항식.md",
+    "자료구조/draw/희소다항식그려보기.excalidraw.md",
     "Templater/Study Log Templater.md",
     "Templater",
     "자료구조/draw/Untitled.canvas",
