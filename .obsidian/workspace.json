@@ -60,7 +60,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -215,11 +215,11 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "365f1b6d0b0a7620",
+  "active": "41605afa0e4757af",
   "lastOpenFiles": [
+    "자료구조/draw/행렬.excalidraw.md",
     "자료구조/draw/다항식그려보기.excalidraw.md",
     "자료구조/03. 행렬.md",
-    "자료구조/draw/행렬.excalidraw.md",
     "자료구조/02. 희소 다항식.md",
     "자료구조/01. 다항식.md",
     "자료구조/draw/희소다항식그려보기.excalidraw.md",
