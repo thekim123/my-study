@@ -25,12 +25,14 @@
             "id": "41605afa0e4757af",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "자료구조/Drawing 2024-11-29 22.15.12.excalidraw.md"
+                "file": "자료구조/다항식.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "excalidraw-icon",
-              "title": "Drawing 2024-11-29 22.15.12.excalidraw"
+              "icon": "lucide-file",
+              "title": "다항식"
             }
           }
         ],
@@ -189,10 +191,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "41605afa0e4757af",
+  "active": "3cb890457ce37095",
   "lastOpenFiles": [
-    "자료구조/다항식.md",
     "자료구조/Drawing 2024-11-29 22.15.12.excalidraw.md",
+    "자료구조/다항식.md",
     "Welcome.md",
     "자료구조"
   ]
