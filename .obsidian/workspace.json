@@ -27,10 +27,10 @@
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "Data Structure/draw/Drawing 2024-12-02 17.51.22.excalidraw.md"
+                "file": "Data Structure/draw/sparse-matrix.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "Drawing 2024-12-02 17.51.22.excalidraw"
+              "title": "sparse-matrix.excalidraw"
             }
           }
         ],
@@ -188,10 +188,10 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "f35ab8c09b47e69e",
+  "active": "3cb890457ce37095",
   "lastOpenFiles": [
     "Data Structure/04. 소멸자.md",
-    "Data Structure/draw/Drawing 2024-12-02 17.51.22.excalidraw.md",
+    "Data Structure/draw/sparse-matrix.excalidraw.md",
     "Java/자바 1.8로 업데이트해야 되는 이유.md",
     "Templater/Study Log Templater.md",
     "Data Structure/draw/다항식그려보기.excalidraw.md",
