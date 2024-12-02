@@ -25,12 +25,14 @@
             "id": "41605afa0e4757af",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "자료구조/draw/희소다항식그려보기.excalidraw.md"
+                "file": "Java/자바 1.8로 마이그레이션해야 되는 이유.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "excalidraw-icon",
-              "title": "희소다항식그려보기.excalidraw"
+              "icon": "lucide-file",
+              "title": "자바 1.8로 마이그레이션해야 되는 이유"
             }
           },
           {
@@ -216,17 +218,19 @@
   },
   "active": "41605afa0e4757af",
   "lastOpenFiles": [
-    "자료구조/draw/행렬.excalidraw.md",
-    "자료구조/draw/다항식그려보기.excalidraw.md",
-    "자료구조/03. 행렬.md",
-    "자료구조/02. 희소 다항식.md",
-    "자료구조/01. 다항식.md",
-    "자료구조/draw/희소다항식그려보기.excalidraw.md",
+    "Data Structure/01. 다항식.md",
+    "Data Structure/03. 행렬.md",
+    "Data Structure/02. 희소 다항식.md",
+    "Java/자바 1.8로 마이그레이션해야 되는 이유.md",
     "Templater/Study Log Templater.md",
+    "Data Structure/draw/희소다항식그려보기.excalidraw.md",
+    "Java",
+    "Data Structure/draw/행렬.excalidraw.md",
+    "Data Structure/draw/다항식그려보기.excalidraw.md",
     "Templater",
     "자료구조/draw/Untitled.canvas",
-    "자료구조/draw",
+    "Data Structure/draw",
     "Welcome.md",
-    "자료구조"
+    "Data Structure"
   ]
 }
