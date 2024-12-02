@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Data Structure/04. 소멸자.md",
+                "file": "Java/자바 1.8로 업데이트해야 되는 이유.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "04. 소멸자"
+              "title": "자바 1.8로 업데이트해야 되는 이유"
             }
           },
           {
@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Data Structure/04. 소멸자.md",
+                "file": "Data Structure/03. 행렬.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "04. 소멸자"
+              "title": "03. 행렬"
             }
           }
         ],
@@ -192,13 +192,13 @@
   },
   "active": "f35ab8c09b47e69e",
   "lastOpenFiles": [
+    "Java/자바 1.8로 업데이트해야 되는 이유.md",
+    "Data Structure/04. 소멸자.md",
     "Data Structure/03. 행렬.md",
     "Data Structure/02. 희소 다항식.md",
     "Data Structure/01. 다항식.md",
     "Data Structure/draw/sparse-matrix.excalidraw.md",
     "Data Structure/draw/희소다항식그려보기.excalidraw.md",
-    "Data Structure/04. 소멸자.md",
-    "Java/자바 1.8로 업데이트해야 되는 이유.md",
     "Templater/Study Log Templater.md",
     "Data Structure/draw/다항식그려보기.excalidraw.md",
     "Java",
