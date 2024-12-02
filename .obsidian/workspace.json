@@ -11,10 +11,14 @@
             "id": "2af8bc5deca2b2eb",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Java/자바 1.8로 업데이트해야 되는 이유.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "자바 1.8로 업데이트해야 되는 이유"
             }
           }
         ]
