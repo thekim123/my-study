@@ -4,21 +4,20 @@
     "type": "split",
     "children": [
       {
-        "id": "63b0ca63ed204bf4",
+        "id": "cb29278de51b2404",
         "type": "tabs",
         "children": [
           {
-            "id": "2af8bc5deca2b2eb",
+            "id": "23b2624dc44bb477",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "diff-view",
               "state": {
-                "file": "Data Structure/04. 소멸자.md",
-                "mode": "source",
-                "source": false
+                "file": ".obsidian/appearance.json",
+                "staged": true
               },
-              "icon": "lucide-file",
-              "title": "04. 소멸자"
+              "icon": "git-pull-request",
+              "title": "Diff View (appearance.json)"
             }
           }
         ]
@@ -175,11 +174,14 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "2af8bc5deca2b2eb",
+  "active": "23b2624dc44bb477",
   "lastOpenFiles": [
+    "Document/FP 산정.md",
+    "Templater/Study Log Templater.md",
+    "Document",
+    "Welcome.md",
     "Java/자바 1.8로 업데이트해야 되는 이유.md",
     "Data Structure/04. 소멸자.md",
-    "Templater/Study Log Templater.md",
     "Data Structure/draw/다항식그려보기.excalidraw.md",
     "Data Structure/01. 다항식.md",
     "Data Structure/03. 행렬.md",
@@ -190,7 +192,6 @@
     "Templater",
     "자료구조/draw/Untitled.canvas",
     "Data Structure/draw",
-    "Welcome.md",
     "Data Structure"
   ]
 }
