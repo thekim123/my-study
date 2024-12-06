@@ -54,12 +54,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "C++/소멸자.md",
+                "file": "Templater/Study Log Templater.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "소멸자"
+              "title": "Study Log Templater"
             }
           }
         ],
@@ -213,14 +213,14 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "obsidian-git:Open Git source control": false,
-      "templater-obsidian:Templater": false
+      "templater-obsidian:Templater": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "528ad0d741266308",
+  "active": "3cb890457ce37095",
   "lastOpenFiles": [
+    "C++/소멸자.md",
     "Document/FP 산정.md",
-    "C++/소멸자.md",
-    "C++/소멸자.md",
     "conflict-files-obsidian-git.md",
     "Templater/Study Log Templater.md",
     "Welcome.md",
