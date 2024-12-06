@@ -54,12 +54,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Templater/Study Log Templater.md",
+                "file": "Nginx/SSL 인증서 넣기.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Study Log Templater"
+              "title": "SSL 인증서 넣기"
             }
           }
         ],
@@ -217,12 +217,14 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "3cb890457ce37095",
+  "active": "528ad0d741266308",
   "lastOpenFiles": [
+    "Templater/Study Log Templater.md",
+    "Nginx/SSL 인증서 넣기.md",
+    "Nginx",
     "C++/소멸자.md",
     "Document/FP 산정.md",
     "conflict-files-obsidian-git.md",
-    "Templater/Study Log Templater.md",
     "Welcome.md",
     "새 텍스트 문서.txt",
     "Data Structure/draw/sparse-matrix.excalidraw.md",
