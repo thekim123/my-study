@@ -49,6 +49,18 @@
             }
           },
           {
+            "id": "1b761fd6d47cc8be",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Data Structure/draw/Drawing 2024-12-09 18.24.53.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "Drawing 2024-12-09 18.24.53.excalidraw"
+            }
+          },
+          {
             "id": "528ad0d741266308",
             "type": "leaf",
             "state": {
@@ -63,7 +75,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -217,10 +229,11 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "0890de893b1c540a",
+  "active": "1b761fd6d47cc8be",
   "lastOpenFiles": [
-    "Nginx/SSL 인증서 넣기.md",
     "Infra/Window 서버에 Nginx+Springboot 웹 서버 가동.md",
+    "Data Structure/draw/Drawing 2024-12-09 18.24.53.excalidraw.md",
+    "Nginx/SSL 인증서 넣기.md",
     "Infra",
     "Document/FP 산정.md",
     "Templater/Study Log Templater.md",
