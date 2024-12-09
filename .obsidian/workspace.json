@@ -63,7 +63,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -213,16 +213,17 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "obsidian-git:Open Git source control": false,
-      "templater-obsidian:Templater": false
+      "templater-obsidian:Templater": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "528ad0d741266308",
+  "active": "0890de893b1c540a",
   "lastOpenFiles": [
-    "Templater/Study Log Templater.md",
     "Nginx/SSL 인증서 넣기.md",
+    "Document/FP 산정.md",
+    "Templater/Study Log Templater.md",
     "Nginx",
     "C++/소멸자.md",
-    "Document/FP 산정.md",
     "conflict-files-obsidian-git.md",
     "Welcome.md",
     "새 텍스트 문서.txt",
