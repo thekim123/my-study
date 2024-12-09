@@ -54,10 +54,10 @@
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "Data Structure/draw/Drawing 2024-12-09 18.24.53.excalidraw.md"
+                "file": "Data Structure/draw/singly-linked-list-reverse.excalidraw.md"
               },
               "icon": "excalidraw-icon",
-              "title": "Drawing 2024-12-09 18.24.53.excalidraw"
+              "title": "singly-linked-list-reverse.excalidraw"
             }
           },
           {
@@ -229,10 +229,10 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "1b761fd6d47cc8be",
+  "active": "3cb890457ce37095",
   "lastOpenFiles": [
     "Infra/Window 서버에 Nginx+Springboot 웹 서버 가동.md",
-    "Data Structure/draw/Drawing 2024-12-09 18.24.53.excalidraw.md",
+    "Data Structure/draw/singly-linked-list-reverse.excalidraw.md",
     "Nginx/SSL 인증서 넣기.md",
     "Infra",
     "Document/FP 산정.md",
