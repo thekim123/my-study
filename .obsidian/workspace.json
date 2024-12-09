@@ -40,12 +40,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Document/FP 산정.md",
+                "file": "Infra/Window 서버에 Nginx+Springboot 웹 서버 가동.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "FP 산정"
+              "title": "Window 서버에 Nginx+Springboot 웹 서버 가동"
             }
           },
           {
@@ -213,12 +213,15 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "obsidian-git:Open Git source control": false,
-      "templater-obsidian:Templater": false
+      "templater-obsidian:Templater": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
   "active": "0890de893b1c540a",
   "lastOpenFiles": [
     "Nginx/SSL 인증서 넣기.md",
+    "Infra/Window 서버에 Nginx+Springboot 웹 서버 가동.md",
+    "Infra",
     "Document/FP 산정.md",
     "Templater/Study Log Templater.md",
     "Nginx",
