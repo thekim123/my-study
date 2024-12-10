@@ -32,9 +32,21 @@
               "icon": "excalidraw-icon",
               "title": "Drawing 2024-12-03 13.09.51.excalidraw"
             }
+          },
+          {
+            "id": "7ebf21ec359d6a6b",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Data Structure/draw/Drawing 2024-12-11 00.23.38.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "Drawing 2024-12-11 00.23.38.excalidraw"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -188,10 +200,11 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "f82992f427dc9c9d",
+  "active": "7ebf21ec359d6a6b",
   "lastOpenFiles": [
-    "Data Structure/04. 스택(Stack).md",
     "Data Structure/draw/Drawing 2024-12-03 13.09.51.excalidraw.md",
+    "Data Structure/draw/Drawing 2024-12-11 00.23.38.excalidraw.md",
+    "Data Structure/04. 스택(Stack).md",
     "C++/2중 포인터.md",
     "Data Structure/03. 행렬.md",
     "Data Structure/draw/행렬.excalidraw.md",
