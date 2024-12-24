@@ -2,15 +2,7 @@
 Date: 2024-12-24
 Category: Auth
 ---
-## 🔐 **Refresh Token 보안의 핵심: 탈취를 막는 것!**
-
-당신이 아주 정확하게 핵심을 짚었습니다!
-
-- **HttpOnly Secure 쿠키**를 사용해 Refresh Token을 저장한다면, **XSS (Cross-Site Scripting)** 같은 클라이언트 측 공격으로 토큰을 탈취하는 것은 거의 불가능합니다.
-- **Redis에 Refresh Token을 저장하는 것**은 **부가적인 보안 조치**에 가깝습니다.
-
 ---
-
 # 🚀 **1. HttpOnly Secure 쿠키 vs Redis: 역할 구분**
 
 ### ✅ **1.1 HttpOnly Secure 쿠키 (클라이언트 측 저장소)**
@@ -42,22 +34,22 @@ Category: Auth
 
 ### ✅ **2.1 Refresh Token 무효화 (강제 로그아웃)**
 
-- 사용자가 로그아웃하거나 계정이 해킹당했을 때, **Redis에서 해당 Refresh Token을 즉시 무효화**할 수 있습니다.
-- 쿠키에서는 이 기능을 지원하지 않습니다.
+- 사용자가 로그아웃하거나 계정이 해킹당했을 때, **Redis에서 해당 Refresh Token을 즉시 무효화**할 수 있다.
+- 쿠키에서는 이 기능을 지원하지 않는다.
 
 ### ✅ **2.2 토큰 재사용 방지 (Replay Attack 방지)**
 
-- Redis를 통해 **Refresh Token의 사용 여부를 체크**할 수 있습니다.
-- 한 번 사용된 Refresh Token은 Redis에서 즉시 삭제하여 재사용을 방지합니다.
+- Redis를 통해 **Refresh Token의 사용 여부를 체크**할 수 있다.
+- 한 번 사용된 Refresh Token은 Redis에서 즉시 삭제하여 재사용을 방지한다.
 
 ### ✅ **2.3 유효성 검증 (Centralized Validation)**
 
-- 모든 Refresh Token의 유효성을 **Redis에서 중앙 집중식으로 검증**할 수 있습니다.
+- 모든 Refresh Token의 유효성을 **Redis에서 중앙 집중식으로 검증**할 수 있다.
 - 만료 시간(TTL)도 Redis에서 관리합니다.
 
 ### ✅ **2.4 로그 및 모니터링**
 
-- Redis에 저장된 Refresh Token을 통해 **누가, 언제, 어떤 기기에서 토큰을 사용했는지 추적**할 수 있습니다.
+- Redis에 저장된 Refresh Token을 통해 **누가, 언제, 어떤 기기에서 토큰을 사용했는지 추적**할 수 있다.
 
 ---
 
@@ -77,10 +69,10 @@ Category: Auth
 
 # 🎯 **4. Redis는 부가적인 보안 조치일까?**
 
-### ✅ **정답:** **Yes! Redis는 부가적인 보안 조치입니다.**
+### ✅ **정답:** **Yes! Redis는 부가적인 보안 조치이다.**
 
-- **HttpOnly Secure 쿠키**로 Refresh Token을 저장하면 **탈취는 거의 불가능합니다.**
-- Redis를 사용하는 이유는 주로 **유효성 관리, 강제 로그아웃, 재사용 방지, 중앙 집중식 관리**를 위해서입니다.
+- **HttpOnly Secure 쿠키**로 Refresh Token을 저장하면 **탈취는 거의 불가능하다.**
+- Redis를 사용하는 이유는 주로 **유효성 관리, 강제 로그아웃, 재사용 방지, 중앙 집중식 관리**를 위해서이다.
 
 **즉:**
 
@@ -109,8 +101,8 @@ Category: Auth
 
 # 📚 **6. 결론**
 
-- **HttpOnly Secure 쿠키**로 Refresh Token을 저장하면 탈취 가능성은 거의 없습니다.
-- **Redis는 추가적인 보안 조치**로 사용됩니다.
+- **HttpOnly Secure 쿠키**로 Refresh Token을 저장하면 탈취 가능성은 거의 없다.
+- **Redis는 추가적인 보안 조치**로 사용된다.
 - **핵심:**
     - **HttpOnly Secure 쿠키 → 탈취 방지**
     - **Redis → 강제 무효화, 재사용 방지, 중앙 집중식 검증**
@@ -128,7 +120,4 @@ Category: Auth
 
 **✅ 결론적으로:**
 
-- **HttpOnly Secure 쿠키로 탈취를 방지하고 Redis로 관리를 강화하면 안전한 JWT 인증 시스템을 구축할 수 있습니다.**
-
-이제 Refresh Token의 역할과 Redis의 사용 목적이 더 명확해졌나요? 😊  
-더 궁금하거나 토론하고 싶은 부분이 있으면 말씀해주세요! 🚀🔑
+- **HttpOnly Secure 쿠키로 탈취를 방지하고 Redis로 관리를 강화하면 안전한 JWT 인증 시스템을 구축할 수 있다.**
