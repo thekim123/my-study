@@ -1,6 +1,6 @@
 ---
 Date: 2024-12-24
-Category:
+Category: Auth
 ---
 ### ✅ **1. 쿠키(Cookie)란?**
 
