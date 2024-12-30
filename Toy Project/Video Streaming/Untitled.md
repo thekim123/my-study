@@ -418,116 +418,17 @@ export default {
 
 ---
 
-### ✅ **3.1 시스템 역할 분담**
-
-|**모듈**|**책임**|**기술 스택**|
-|---|---|---|
-|**Spring Boot**|영상 업로드, 프레임 분할, 프레임 합성|FFmpeg, Java|
-|**Python 엔진**|프레임 비식별화 처리 (모자이크 등)|OpenCV, Python|
-
----
-
-## 📊 **4. 장단점 비교**
-
-### ✅ **4.1 Spring Boot에서 프레임 분할 (권장)**
-
-**장점:**
-
-- Spring Boot에서 프레임을 분할하면 **책임이 명확**해짐.
-- Python 엔진은 **이미지 처리**에 집중할 수 있음.
-- Spring Boot는 FFmpeg와의 호환성이 높음.
-
-**단점:**
-
-- 백엔드가 영상 처리 로직을 포함해야 해서 다소 무거워질 수 있음.
-
----
-
-### ✅ **4.2 Python 엔진에서 프레임 분할 (권장하지 않음)**
-
-**장점:**
-
-- Python 엔진이 모든 처리를 담당할 수 있음.
-- 비식별 처리와 영상 처리를 통합 가능.
-
-**단점:**
-
-- Python이 **대량의 영상 프레임 분할에 비효율적일 수 있음**.
-- Spring Boot에서 Python 엔진을 호출하는 API 복잡도가 증가.
-- 책임이 애매해짐 (비식별 처리와 영상 분할이 섞임).
-
----
-
-## 📝 **5. 최종 설계안**
-
-### ✅ **5.1 추천 아키텍처 요약**
-
-1. **Spring Boot (Backend)**
-    
-    - 영상 업로드 및 저장
-    - 프레임 분할 (FFmpeg 사용)
-    - 최종 영상 합성
-2. **Python 엔진 (AI Engine)**
-    
-    - 프레임 비식별화 (OpenCV 사용)
-    - AI 알고리즘 적용
-3. **Frontend (Vue.js)**
-    
-    - 프레임 리스트 제공 및 렌더링
-    - 사용자 보정 기능
-
----
-
-## 🧠 **6. 책임 원칙 (SRP) 검토**
-
-- **Spring Boot:** 영상의 분할, 저장, 합성 책임
-- **Python 엔진:** 비식별 처리 책임
-
-이 구조는 **책임 원칙(SRP)**에 잘 부합하며,
-
-- 각 컴포넌트가 **단일 책임**에 집중할 수 있음.
-- **유지보수 및 확장성**이 높아짐.
-- **성능 최적화**에 더 효과적임.
-
----
-
-## 🚦 **7. 추가 고려사항**
-
-1. **데이터 전달 최적화:** Python 엔진과 Spring Boot 사이에서 프레임 데이터를 파일 경로로 전달 (네트워크로 직접 데이터 전달 최소화).
-2. **에러 핸들링:** Python 엔진에서 비식별 처리 중 오류 발생 시 Spring Boot가 오류를 적절히 처리.
-3. **확장성:** 추후 Python 엔진을 AI 클러스터로 확장할 가능성 고려.
-
----
-
-## 🎯 **결론**
-
-- **프레임 분할:** Spring Boot (FFmpeg)
-- **비식별화:** Python 엔진 (OpenCV)
-- **최종 합성:** Spring Boot (FFmpeg)
-
-이 구조가 **책임 원칙을 준수하며 가장 효율적이고 확장성 높은 아키텍처**야.  
-혹시 추가로 더 고민되는 부분이 있거나 명확히 하고 싶은 포인트가 있으면 알려줘! 😊✨
-
-
-
-
-
 ### 🤔 **프레임 분할 및 이미지 처리: Java vs Python**
-
-좋은 지적이야! 일반적으로 **이미지 처리와 영상 프레임 분할**은 Python이 Java보다 더 많이 사용돼. 이유는 Python이 **이미지/영상 처리에 특화된 라이브러리(OpenCV, NumPy 등)**를 풍부하게 지원하고, 처리 속도나 개발 생산성 측면에서도 유리하기 때문이야.
-
----
-
 ## 📚 **1. Java와 Python의 이미지/영상 처리 비교**
 
-|**항목**|**Java (FFmpeg, JavaCV)**|**Python (OpenCV, NumPy)**|
-|---|---|---|
-|**라이브러리 생태계**|제한적 (JavaCV, FFmpeg Wrapper)|풍부함 (OpenCV, NumPy, Pillow 등)|
-|**개발 편의성**|상대적으로 복잡함|직관적이고 빠르게 개발 가능|
-|**성능**|좋음 (FFmpeg 최적화 시)|매우 좋음 (C/C++ 기반 최적화)|
-|**학습 곡선**|상대적으로 높음|낮음|
-|**멀티 플랫폼 지원**|넓음|넓음|
-|**커뮤니티**|제한적|매우 활성화됨|
+| **항목**        | **Java (FFmpeg, JavaCV)**    | **Python (OpenCV, NumPy)**    |
+| ------------- | ---------------------------- | ----------------------------- |
+| **라이브러리 생태계** | 제한적 (JavaCV, FFmpeg Wrapper) | 풍부함 (OpenCV, NumPy, Pillow 등) |
+| **개발 편의성**    | 상대적으로 복잡함                    | 직관적이고 빠르게 개발 가능               |
+| **성능**        | 좋음 (FFmpeg 최적화 시)            | 매우 좋음 (C/C++ 기반 최적화)          |
+| **학습 곡선**     | 상대적으로 높음                     | 낮음                            |
+| **멀티 플랫폼 지원** | 넓음                           | 넓음                            |
+| **커뮤니티**      | 제한적                          | 매우 활성화됨                       |
 
 ---
 
@@ -615,80 +516,6 @@ export default {
 
 ---
 
-## 🐍 **4. Python 엔진 예제 코드**
-
-### ✅ **4.1 프레임 분할 & 비식별화 (Python + OpenCV)**
-
-```python
-import cv2
-import os
-
-def process_video(video_path, output_folder):
-    os.makedirs(output_folder, exist_ok=True)
-    cap = cv2.VideoCapture(video_path)
-    frame_count = 0
-
-    while cap.isOpened():
-        ret, frame = cap.read()
-        if not ret:
-            break
-
-        # 프레임 모자이크 처리
-        frame = cv2.GaussianBlur(frame, (99, 99), 30)
-
-        # 프레임 저장
-        output_path = os.path.join(output_folder, f'frame_{frame_count}.jpg')
-        cv2.imwrite(output_path, frame)
-        frame_count += 1
-
-    cap.release()
-    return [os.path.join(output_folder, f'frame_{i}.jpg') for i in range(frame_count)]
-```
-
-### ✅ **4.2 Python REST API (Flask)**
-
-```python
-from flask import Flask, request, jsonify
-
-app = Flask(__name__)
-
-@app.route('/process_video', methods=['POST'])
-def process_video_api():
-    video_path = request.json['video_path']
-    output_folder = request.json['output_folder']
-    
-    frames = process_video(video_path, output_folder)
-    return jsonify({"frames": frames})
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
-```
-
----
-
-## 💻 **5. Spring Boot 예제**
-
-### ✅ **5.1 Python 엔진 호출**
-
-```java
-import org.springframework.web.client.RestTemplate;
-
-@PostMapping("/process")
-public ResponseEntity<String> processVideo(@RequestParam String videoPath) {
-    String pythonApiUrl = "http://localhost:5000/process_video";
-    RestTemplate restTemplate = new RestTemplate();
-    
-    Map<String, String> request = new HashMap<>();
-    request.put("video_path", videoPath);
-    request.put("output_folder", "/path/to/output");
-
-    Map response = restTemplate.postForObject(pythonApiUrl, request, Map.class);
-    return ResponseEntity.ok(response.toString());
-}
-```
-
----
-
 ## ✅ **6. 권장 아키텍처의 장점**
 
 1. **책임 분리 (SRP 준수)**
@@ -717,11 +544,6 @@ public ResponseEntity<String> processVideo(@RequestParam String videoPath) {
 
 - **Python:** 영상 처리, 프레임 분할, 비식별화, 최종 합성
 - **Spring Boot:** API 관리, 메타데이터 전달, 최종 결과 반환
-
-이 구조가 **책임 원칙(SRP)**을 잘 준수하고, Python의 강점(OpenCV)을 최대한 활용하는 최적화된 설계야.
-
-혹시 이 구조에 대한 추가 의견이나 궁금한 부분이 있으면 알려줘! 😊✨
-
 
 
 
@@ -830,95 +652,6 @@ public ResponseEntity<String> processVideo(@RequestParam String videoPath) {
 9️⃣ **Spring Boot → Python (선택):** 최종 영상 합성 요청
 
 ---
-
-## 🛠️ **3. 구현 예시**
-
-### ✅ **3.1 Python 엔진 (저장 및 메타데이터 반환)**
-
-```python
-import cv2
-import os
-
-def process_video(video_path, output_folder):
-    os.makedirs(output_folder, exist_ok=True)
-    cap = cv2.VideoCapture(video_path)
-    frame_count = 0
-    frame_metadata = []
-
-    while cap.isOpened():
-        ret, frame = cap.read()
-        if not ret:
-            break
-
-        output_path = os.path.join(output_folder, f'frame_{frame_count}.jpg')
-        cv2.imwrite(output_path, frame)
-        frame_metadata.append({
-            "frameId": frame_count,
-            "imageUrl": f"/storage/video123/frame_{frame_count}.jpg"
-        })
-        frame_count += 1
-
-    cap.release()
-    return frame_metadata
-```
-
----
-
-### ✅ **3.2 Python → Spring Boot 메타데이터 전송**
-
-```python
-import requests
-
-metadata = process_video("/path/to/video.mp4", "/path/to/storage/video123")
-
-response = requests.post("http://backend-server/video/metadata", json={
-    "videoId": "video123",
-    "frames": metadata
-})
-```
-
----
-
-### ✅ **3.3 Spring Boot 메타데이터 저장**
-
-```java
-@PostMapping("/metadata")
-public ResponseEntity<String> saveMetadata(@RequestBody VideoMetadata metadata) {
-    // DB에 메타데이터 저장
-    for (FrameMetadata frame : metadata.getFrames()) {
-        // 프레임 메타데이터 저장 로직
-    }
-    return ResponseEntity.ok("Metadata saved successfully");
-}
-```
-
----
-
-## 📝 **4. 최종 구조 요약**
-
-1. **영상 저장:** Spring Boot
-2. **프레임 처리 및 비식별화:** Python 엔진 (OpenCV)
-3. **프레임 저장:** 스토리지 (AWS S3, MinIO, NAS)
-4. **메타데이터 관리:** Spring Boot (DB)
-5. **최종 영상 합성:** Python 엔진 or Spring Boot
-
----
-
-## 🚦 **5. 선택 기준**
-
-- **데이터 전송 최적화:** Python → 스토리지
-- **책임 분리:** Python(비식별 처리), Spring Boot(메타데이터 관리)
-- **보안:** Python 엔진은 DB에 접근하지 않음
-
-**📌 추천 구조: Python → 스토리지 저장 → Spring Boot 메타데이터 관리**
-
-이 구조는 **책임 원칙(SRP)**을 준수하며, 성능과 유지보수성을 동시에 만족하는 아키텍처야.
-
-혹시 더 궁금한 점이나 추가 고민이 있다면 말해줘! 😊🚀
-
-
-
-
 
 
 ### 🚀 **Kafka를 활용한 영상/이미지 처리 아키텍처**
