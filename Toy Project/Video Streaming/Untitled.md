@@ -109,33 +109,27 @@ Category: Toy Project
 **📌 결론:** 일반적으로 권장되지 않는 방법. 두 시스템이 하나의 DB를 직접 공유하는 것은 **결합도를 높이고 유지보수를 어렵게 만듦**.
 
 ---
-
 #### ✅ **1-2 Python이 처리 후 Spring Boot로 반환 → Spring Boot가 저장**
-
 - **설명:** Python 엔진은 프레임을 생성하고 비식별 처리한 후, 결과물을 Spring Boot에 반환.
 - **흐름:**
     1. Spring Boot → Python으로 영상 전달
     2. Python 엔진: 프레임 분할 및 비식별화 처리
     3. Python 엔진 → 비식별화된 프레임을 Spring Boot로 반환 (파일 경로 or 데이터 스트림)
     4. Spring Boot → DB에 메타데이터 저장
-
-#### **⚖️ 장단점**
-
+    5. 
 ✅ **장점:**
-
 - Python 엔진이 DB에 접근할 필요가 없음
 - 데이터베이스 접근 권한 및 보안 문제 해결
 - Spring Boot가 일관된 데이터 접근 및 관리 수행
 
 ❌ **단점:**
-
 - Python → Spring Boot로 프레임 데이터를 전송하는 과정에서 **네트워크 오버헤드** 발생
 - 대용량 프레임을 전송할 경우, Spring Boot WAS에 부하 발생
 
 **📌 결론:** 네트워크 오버헤드가 걱정되긴 하지만, **책임 분리가 명확하고 보안상 안전**하기 때문에 이 방식이 **더 권장됨**.
 
 ---
-### ✅ **1.3 Python이 처리 후 스토리지에 저장 → Spring Boot가 메타데이터 관리**
+#### ✅ **1-4 Python이 처리 후 스토리지에 저장 → Spring Boot가 메타데이터 관리**
 
 - **설명:** Python 엔진이 프레임 데이터를 **오브젝트 스토리지 (e.g., AWS S3, MinIO, NAS)**에 저장하고, Spring Boot는 해당 스토리지의 메타데이터만 관리.
 - **흐름:**
@@ -144,8 +138,6 @@ Category: Toy Project
     3. Python 엔진 → 스토리지에 프레임 저장 (경로 반환)
     4. Python 엔진 → Spring Boot에 메타데이터(경로, 프레임 ID) 전달
     5. Spring Boot → DB에 메타데이터 저장
-
-#### **⚖️ 장단점**
 
 ✅ **장점:**
 
