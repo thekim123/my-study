@@ -28,14 +28,6 @@ Category: Toy Project
 - 실시간 스트리밍이나 단계적으로 데이터를 처리해야 할 경우
 
 ---
-
-
-### 🎯 **비식별 처리 보정 기능 설계**
-
-사용자가 **모자이크를 추가하거나 제거하는 보정 기능**을 요구한다면, 프레임 단위로 영상을 처리하고 각 프레임을 사용자에게 제공한 뒤, 최종적으로 **사용자 보정 결과를 다시 합쳐서 하나의 영상으로 생성**해야 해.
-
----
-
 ## 🛠️ **1. 전체 흐름**
 
 1. **영상 업로드 → 프레임 생성**
@@ -62,184 +54,7 @@ Category: Toy Project
 ## 📚 **2. 데이터 흐름 설계**
 
 ### ✅ **2.1 엔드포인트 설계**
-
-|**API**|**Method**|**설명**|
-|---|---|---|
-|`/video/upload`|POST|사용자 영상 업로드|
-|`/video/process`|GET|영상 → 프레임 단위로 분할 및 모자이크 처리|
-|`/video/frames`|GET|모자이크된 프레임 리스트 반환|
-|`/video/frame/{frameId}`|GET|특정 프레임 반환|
-|`/video/frame/{frameId}`|POST|특정 프레임 보정 및 저장|
-|`/video/compile`|POST|수정된 프레임을 합쳐 최종 영상 생성|
-|`/video/result`|GET|최종 영상 반환|
-
 ---
-
-### ✅ **2.2 상태 다이어그램**
-
-```plaintext
-[영상 업로드] → [프레임 생성] → [모자이크 적용] → [사용자 보정]
-    ↑                                          ↓
-[프레임 반환] ← [프레임 저장] ← [보정된 프레임 전송]
-    ↓                                          ↓
-[최종 영상 생성] → [최종 영상 반환]
-```
-
----
-
-## 🧩 **3. 백엔드 설계 예시**
-
-### ✅ **3.1 프레임 생성 및 처리**
-
-```java
-@RestController
-@RequestMapping("/video")
-public class VideoController {
-
-    // 1. 영상 업로드
-    @PostMapping("/upload")
-    public ResponseEntity<String> uploadVideo(@RequestParam("file") MultipartFile file) {
-        // 영상 파일 저장
-        String videoId = "video123";
-        return ResponseEntity.ok(videoId);
-    }
-
-    // 2. 영상 → 프레임 분할 및 모자이크 적용
-    @GetMapping("/process")
-    public ResponseEntity<Map<String, Object>> processVideo(@RequestParam("videoId") String videoId) {
-        List<Map<String, String>> frames = new ArrayList<>();
-        for (int i = 1; i <= 5; i++) {
-            frames.add(Map.of("frameId", String.valueOf(i), "imageUrl", "/videos/" + videoId + "/frame" + i + "_blurred.jpg"));
-        }
-        return ResponseEntity.ok(Map.of("videoId", videoId, "frames", frames));
-    }
-
-    // 3. 특정 프레임 제공
-    @GetMapping("/frame/{frameId}")
-    public ResponseEntity<Resource> getFrame(@PathVariable String frameId) {
-        Resource file = new FileSystemResource("/videos/video123/" + frameId + "_blurred.jpg");
-        return ResponseEntity.ok()
-            .contentType(MediaType.IMAGE_JPEG)
-            .body(file);
-    }
-
-    // 4. 사용자 보정 프레임 저장
-    @PostMapping("/frame/{frameId}")
-    public ResponseEntity<String> saveCorrectedFrame(
-            @PathVariable String frameId,
-            @RequestParam("file") MultipartFile file) {
-        // 보정된 프레임 저장 로직
-        return ResponseEntity.ok("Frame " + frameId + " updated successfully");
-    }
-
-    // 5. 최종 영상 생성
-    @PostMapping("/compile")
-    public ResponseEntity<String> compileVideo(@RequestParam("videoId") String videoId) {
-        // 저장된 프레임을 다시 합쳐 최종 영상 생성
-        return ResponseEntity.ok("/videos/" + videoId + "/final_video.mp4");
-    }
-
-    // 6. 최종 영상 반환
-    @GetMapping("/result")
-    public ResponseEntity<Resource> getFinalVideo(@RequestParam("videoId") String videoId) {
-        Resource file = new FileSystemResource("/videos/" + videoId + "/final_video.mp4");
-        return ResponseEntity.ok()
-            .contentType(MediaType.APPLICATION_OCTET_STREAM)
-            .body(file);
-    }
-}
-```
-
----
-
-## 🎨 **4. 프론트엔드 (Vue.js) 예시**
-
-```vue
-<template>
-  <div>
-    <h2>비식별화 영상 보정</h2>
-    <input type="file" @change="uploadVideo" />
-    <button @click="processVideo">비식별화 처리</button>
-    <div v-for="frame in frames" :key="frame.frameId">
-      <img :src="frame.imageUrl" alt="Frame Image" />
-      <button @click="editFrame(frame.frameId)">보정</button>
-    </div>
-    <button @click="compileVideo">최종 영상 생성</button>
-  </div>
-</template>
-
-<script>
-import axios from 'axios';
-
-export default {
-  data() {
-    return {
-      videoId: '',
-      frames: []
-    };
-  },
-  methods: {
-    async uploadVideo(event) {
-      const file = event.target.files[0];
-      const formData = new FormData();
-      formData.append('file', file);
-      const response = await axios.post('/video/upload', formData);
-      this.videoId = response.data;
-    },
-    async processVideo() {
-      const response = await axios.get(`/video/process?videoId=${this.videoId}`);
-      this.frames = response.data.frames;
-    },
-    async editFrame(frameId) {
-      const file = await this.selectFile();
-      const formData = new FormData();
-      formData.append('file', file);
-      await axios.post(`/video/frame/${frameId}`, formData);
-      alert(`Frame ${frameId} updated!`);
-    },
-    async compileVideo() {
-      const response = await axios.post(`/video/compile?videoId=${this.videoId}`);
-      window.location.href = response.data; // 최종 영상 다운로드
-    },
-    selectFile() {
-      return new Promise((resolve) => {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = 'image/*';
-        input.onchange = (event) => resolve(event.target.files[0]);
-        input.click();
-      });
-    }
-  }
-};
-</script>
-```
-
----
-
-## 📊 **5. 고려사항**
-
-1. **프레임 저장/관리**
-    - 보정된 프레임을 원본과 구분하여 저장
-2. **영상 합성 최적화**
-    - 프레임을 하나의 영상으로 다시 합성할 때 성능 이슈
-3. **프레임 정합성**
-    - 순서가 어긋나지 않도록 주의
-
----
-
-## 🔗 **6. 최종 결론**
-
-1. **프레임 단위로 비식별화 및 사용자 보정 지원**
-2. **보정된 프레임 저장 및 최종 영상 합성**
-3. **유연한 프론트엔드 UI로 사용자 경험 향상**
-
-이 구조로 진행하면 **확장성**과 **유연성**을 모두 확보할 수 있을 거야. 더 구체적인 부분이 필요하다면 말해줘! 😊✨
-
-
-
-
-
 
 ### 🚀 **네트워크 병목 문제: 프레임 전송 최적화**
 
@@ -259,15 +74,6 @@ export default {
 ---
 
 ## 📚 **2. 최적화 전략**
-
-### ✅ **2.1 서버-사이드 비식별화 처리 (선처리 후 결과만 전송)**
-
-- **설명:** 비식별 처리는 서버에서 완료한 후, 보정을 위한 메타데이터만 클라이언트로 전송.
-- **예시:**
-    - 사용자가 영상에서 특정 프레임을 수정하고 싶다고 선택하면 **해당 프레임만** 전송.
-- **장점:** 데이터 전송량이 크게 감소
-- **단점:** 사용자의 실시간 보정 요구가 많아지면 서버 부담 증가
-
 ---
 
 ### ✅ **2.2 스트리밍 방식 사용 (WebSocket or HTTP Range Requests)**
@@ -277,9 +83,7 @@ export default {
     - 사용자가 스크롤하거나 특정 프레임을 선택할 때만 해당 프레임을 전송
 - **장점:** 실시간으로 필요한 데이터만 주고받음
 - **단점:** 구현 복잡성 증가
-
 ---
-
 ### ✅ **2.3 압축 사용 (Image Compression & Video Encoding)**
 
 - **설명:** 프레임을 고해상도 이미지로 보내는 대신 **JPEG, WebP 등으로 압축**
@@ -288,9 +92,7 @@ export default {
     - 프레임 묶음을 작은 동영상으로 인코딩
 - **장점:** 데이터 전송량 절감
 - **단점:** 인코딩 및 디코딩 시 약간의 CPU 오버헤드
-
 ---
-
 ### ✅ **2.4 프론트엔드 비식별화 지원 (클라이언트 사이드 처리)**
 
 - **설명:** 사용자의 브라우저나 앱에서 직접 프레임에 대한 모자이크 보정을 수행
@@ -298,17 +100,13 @@ export default {
     - `Canvas API`나 `WebGL`을 사용하여 클라이언트에서 모자이크 효과 적용
 - **장점:** 네트워크 트래픽 감소, 서버 부하 감소
 - **단점:** 클라이언트 디바이스 사양에 따라 성능 차이 발생
-
 ---
-
 ### ✅ **2.5 프레임 선택적 전송**
-
 - **설명:** 모든 프레임을 보내지 않고, 사용자가 수정하려는 특정 프레임만 전송
 - **예시:**
     - 사용자가 영상의 특정 구간을 선택 → 해당 구간 프레임만 서버와 주고받음
 - **장점:** 불필요한 데이터 전송 방지
 - **단점:** 사용자가 실시간으로 모든 프레임을 보고 싶어할 경우 대응 어려움
-
 ---
 
 ## 📊 **3. 최적화된 설계 흐름**
@@ -335,101 +133,6 @@ export default {
     - 모든 보정된 프레임을 합쳐 최종 영상 생성
 
 ---
-
-## 💻 **4. 구현 방안**
-
-### ✅ **4.1 Spring Boot 엔드포인트 개선**
-
-```java
-@RestController
-@RequestMapping("/video")
-public class VideoController {
-
-    // 선택적 프레임 전송
-    @GetMapping("/frame/{frameId}")
-    public ResponseEntity<Resource> getSelectedFrame(@PathVariable String frameId) {
-        Resource file = new FileSystemResource("/videos/video123/" + frameId + "_blurred.webp");
-        return ResponseEntity.ok()
-            .contentType(MediaType.IMAGE_WEBP)
-            .body(file);
-    }
-
-    // 프레임 수정 (압축된 상태로 전송)
-    @PostMapping("/frame/{frameId}")
-    public ResponseEntity<String> updateFrame(
-            @PathVariable String frameId,
-            @RequestParam("file") MultipartFile file) {
-        // 수정된 프레임 저장
-        return ResponseEntity.ok("Frame " + frameId + " updated successfully");
-    }
-
-    // 최종 영상 합성
-    @PostMapping("/compile")
-    public ResponseEntity<String> compileVideo(@RequestParam("videoId") String videoId) {
-        // 프레임을 합쳐 최종 영상 생성
-        return ResponseEntity.ok("/videos/" + videoId + "/final_video_compressed.mp4");
-    }
-}
-```
-
----
-
-### ✅ **4.2 프론트엔드 최적화 (Vue.js 예시)**
-
-```vue
-<template>
-  <div>
-    <h2>비식별화 영상 보정</h2>
-    <input type="file" @change="uploadVideo" />
-    <button @click="processVideo">비식별화 처리</button>
-    <div v-for="frame in frames" :key="frame.frameId">
-      <img :src="frame.imageUrl" alt="Frame Image" />
-      <button @click="editFrame(frame.frameId)">보정</button>
-    </div>
-    <button @click="compileVideo">최종 영상 생성</button>
-  </div>
-</template>
-
-<script>
-import axios from 'axios';
-
-export default {
-  data() {
-    return {
-      videoId: '',
-      frames: []
-    };
-  },
-  methods: {
-    async uploadVideo(event) {
-      const file = event.target.files[0];
-      const formData = new FormData();
-      formData.append('file', file);
-      const response = await axios.post('/video/upload', formData);
-      this.videoId = response.data;
-    },
-    async processVideo() {
-      const response = await axios.get(`/video/process?videoId=${this.videoId}`);
-      this.frames = response.data.frames;
-    },
-    async editFrame(frameId) {
-      const file = await this.selectFile();
-      const formData = new FormData();
-      formData.append('file', file);
-      await axios.post(`/video/frame/${frameId}`, formData);
-      alert(`Frame ${frameId} updated!`);
-    },
-    async compileVideo() {
-      const response = await axios.post(`/video/compile?videoId=${this.videoId}`);
-      window.location.href = response.data; // 최종 영상 다운로드
-    }
-  }
-};
-</script>
-```
-
----
-
 ## 📝 **5. 결론 및 추천**
 
 1. **선택적 프레임 전송**: 필요한 프레임만 네트워크로 주고받기
@@ -437,11 +140,6 @@ export default {
 3. **클라이언트 비식별화 보정**: Canvas API를 활용하여 브라우저에서 보정
 
 ---
-
-이렇게 설계하면 **네트워크 병목을 최소화하면서 사용자 경험을 최적화**할 수 있어. 추가로 궁금하거나 보완하고 싶은 부분이 있으면 알려줘! 😊✨
-
-
-
 
 
 
