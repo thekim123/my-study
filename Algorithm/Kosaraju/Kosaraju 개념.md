@@ -44,7 +44,7 @@
 
 
 ---
-
+##  위키
 [컴퓨터 과학](https://ko.wikipedia.org/wiki/%EC%BB%B4%ED%93%A8%ED%84%B0_%EA%B3%BC%ED%95%99 "컴퓨터 과학")에서 **코사라주 알고리즘** (**코사라주-샤리르 알고리즘**으로도 알려져 있다.)은 [유향그래프](https://ko.wikipedia.org/wiki/%EC%9C%A0%ED%96%A5%EA%B7%B8%EB%9E%98%ED%94%84 "유향그래프")에서의 [강한 연결 요소](https://ko.wikipedia.org/wiki/%EA%B0%95%ED%95%9C_%EC%97%B0%EA%B2%B0_%EC%9A%94%EC%86%8C "강한 연결 요소")를 [선형 시간](https://ko.wikipedia.org/wiki/%EC%8B%9C%EA%B0%84_%EB%B3%B5%EC%9E%A1%EB%8F%84 "시간 복잡도")에 찾는 [알고리즘](https://ko.wikipedia.org/wiki/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98 "알고리즘")이다. [앨프리드 에이호](https://ko.wikipedia.org/wiki/%EC%95%A8%ED%94%84%EB%A6%AC%EB%93%9C_%EC%97%90%EC%9D%B4%ED%98%B8 "앨프리드 에이호"), [존 홉크로프트](https://ko.wikipedia.org/wiki/%EC%A1%B4_%ED%99%89%ED%81%AC%EB%A1%9C%ED%94%84%ED%8A%B8 "존 홉크로프트") 및 [제프리 울만](https://ko.wikipedia.org/wiki/%EC%A0%9C%ED%94%84%EB%A6%AC_%EC%9A%B8%EB%A7%8C "제프리 울만")은 이 알고리즘을 [삼바시바 코사라주](https://ko.wikipedia.org/wiki/%EC%82%BC%EB%B0%94%EC%8B%9C%EB%B0%94_%EC%BD%94%EC%82%AC%EB%9D%BC%EC%A3%BC "삼바시바 코사라주") 및 [미샤 샤리르](https://ko.wikipedia.org/wiki/Micha_Sharir "Micha Sharir")의 것으로 보증한다. [삼바시바 코사라주](https://ko.wikipedia.org/wiki/S._Rao_Kosaraju "S. Rao Kosaraju")는 1978년에 이 알고리즘을 제안하였지만 출판하지 않았고, 1981년 [미샤 샤리르](https://ko.wikipedia.org/wiki/Micha_Sharir "Micha Sharir")는 독자적으로 알고리즘을 발견하고 출판하였다. 이 알고리즘은 [역방향 그래프](https://ko.wikipedia.org/wiki/Transpose_graph "Transpose graph")(모든 간선들의 방향을 뒤집은 그래프)가 원래 그래프와 정확히 같은 강한 연결 요소를 갖는다는 사실을 이용한다.
 
 ## 알고리즘
