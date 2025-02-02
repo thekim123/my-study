@@ -93,4 +93,4 @@
 
 그래프가 [인접 리스트](https://ko.wikipedia.org/wiki/%EC%9D%B8%EC%A0%91_%EB%A6%AC%EC%8A%A4%ED%8A%B8 "인접 리스트")의 형태로 주어질 때, 코사라주의 알고리즘은 두 번의 그래프 순회가 수행되므로 최적의 경우 Θ ( V + E ) {\displaystyle \Theta (V+E)} ![{\displaystyle \Theta (V+E)}](https://wikimedia.org/api/rest_v1/media/math/render/svg/1d6f3cfdfc2dd5f269373778460f22af0c4d3466) (선형)시간에 수행된다. 왜냐하면 어떠한 알고리즘이라도 반드시 모든 정점과 간선을 시험해봐야 하기 때문이다. 이것은 개념적으로 가장 간단한 효율적인 알고리즘이지만 오직 한번의 순회만 시행하는 타잔의 강한 연결 요소 알고리즘이나 경로 기반 강한 요소 알고리즘에 비해 비효율적이다.
 
-그래프가 [인접 행렬](https://ko.wikipedia.org/wiki/%EC%9D%B8%EC%A0%91%ED%96%89%EB%A0%AC "인접행렬")로 주어질 때 ,이 알고리즘은  O ( V 2 ) {\displaystyle O(V^{2})} ![{\displaystyle O(V^{2})}](https://wikimedia.org/api/rest_v1/media/math/render/svg/11a5ce39ea34c896a32654d0b4afd06694e7376c) 시간에 작동된다.
+그래프가 [인접 행렬](https://ko.wikipedia.org/wiki/%EC%9D%B8%EC%A0%91%ED%96%89%EB%A0%AC "인접행렬")로 주어질 때 ,이 알고리즘은  O ( V 2 ) ![{\displaystyle O(V^{2})}](https://wikimedia.org/api/rest_v1/media/math/render/svg/11a5ce39ea34c896a32654d0b4afd06694e7376c) 시간에 작동된다.
