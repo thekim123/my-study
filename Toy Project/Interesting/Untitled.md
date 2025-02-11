@@ -16,3 +16,7 @@ Category:
 
 
 ![[Pasted image 20250211211653.png]]
+
+
+엑세스 토큰은 그냥 id만 담도록 하자.
+
