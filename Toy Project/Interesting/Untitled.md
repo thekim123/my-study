@@ -10,3 +10,9 @@ Category:
 
 스웨거에보면
 옥션 id검색
+
+![[Pasted image 20250211211657.png]]
+
+
+
+![[Pasted image 20250211211653.png]]
