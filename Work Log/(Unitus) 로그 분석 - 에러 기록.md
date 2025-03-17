@@ -148,3 +148,55 @@ java.lang.NullPointerException: null
         at java.lang.Thread.run(Thread.java:750) [na:1.8.0_362]
 
 ```
+
+
+
+### 3. EAI 에러
+```
+org.springframework.web.client.ResourceAccessException: I/O error on POST request for "https://10.5.225.101:5100/restv2/UNI_ARV_01.REST_API:REST_ARV_API/IFARV001": Unsupported or unrecognized SSL message; nested exception is javax.net.ssl.SSLException: Unsupported or unrecognized SSL message
+        at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:785) ~[spring-web-5.3.23.jar!/:5.3.23]
+        at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:711) ~[spring-web-5.3.23.jar!/:5.3.23]
+        at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:602) ~[spring-web-5.3.23.jar!/:5.3.23]
+        at com.portal.eai.api.EaiHttpRequest.sendRequest(EaiHttpRequest.java:74) ~[classes!/:0.0.1-SNAPSHOT]
+        at com.portal.eai.api.EaiHttpRequest.registerRequest(EaiHttpRequest.java:42) ~[classes!/:0.0.1-SNAPSHOT]
+        at com.portal.eai.command.EaiRequestAction.lambda$sendApprovalInformation$1(EaiRequestAction.java:42) ~[classes!/:0.0.1-SNAPSHOT]
+        at java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183) ~[na:1.8.0_362]
+        at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175) ~[na:1.8.0_362]
+        at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384) ~[na:1.8.0_362]
+        at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482) ~[na:1.8.0_362]
+        at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472) ~[na:1.8.0_362]
+        at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150) ~[na:1.8.0_362]
+        at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173) ~[na:1.8.0_362]
+        at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:1.8.0_362]
+        at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:485) ~[na:1.8.0_362]
+        at com.portal.eai.command.EaiRequestAction.sendApprovalInformation(EaiRequestAction.java:40) ~[classes!/:0.0.1-SNAPSHOT]
+        at com.portal.eai.service.EaiServiceImpl.sendApprovalResult(EaiServiceImpl.java:28) ~[classes!/:0.0.1-SNAPSHOT]
+        at sun.reflect.GeneratedMethodAccessor2470.invoke(Unknown Source) ~[na:na]
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_362]
+        at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_362]
+        at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344) ~[spring-aop-5.3.23.jar!/:5.3.23]
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198) ~[spring-aop-5.3.23.jar!/:5.3.23]
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.3.23.jar!/:5.3.23]
+        at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:115) ~[spring-aop-5.3.23.jar!/:5.3.23]
+        at scouter.agent.wrapper.async.WrTaskCallable.call(WrTaskCallable.java:38) ~[na:na]
+        at java.util.concurrent.FutureTask.run(FutureTask.java:266) ~[na:1.8.0_362]
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_362]
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_362]
+        at java.lang.Thread.run(Thread.java:750) ~[na:1.8.0_362]
+Caused by: javax.net.ssl.SSLException: Unsupported or unrecognized SSL message
+        at sun.security.ssl.SSLSocketInputRecord.handleUnknownRecord(SSLSocketInputRecord.java:455) ~[na:1.8.0_362]
+        at sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:184) ~[na:1.8.0_362]
+        at sun.security.ssl.SSLTransport.decode(SSLTransport.java:109) ~[na:1.8.0_362]
+        at sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1397) ~[na:1.8.0_362]
+        at sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1305) ~[na:1.8.0_362]
+        at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:440) ~[na:1.8.0_362]
+        at sun.net.www.protocol.https.HttpsClient.afterConnect(HttpsClient.java:559) ~[na:1.8.0_362]
+        at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:197) ~[na:1.8.0_362]
+        at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:167) ~[na:1.8.0_362]
+        at org.springframework.http.client.SimpleBufferingClientHttpRequest.executeInternal(SimpleBufferingClientHttpRequest.java:76) ~[spring-web-5.3.23.jar!/:5.3.23]
+        at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48) ~[spring-web-5.3.23.jar!/:5.3.23]
+        at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66) ~[spring-web-5.3.23.jar!/:5.3.23]
+        at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:776) ~[spring-web-5.3.23.jar!/:5.3.23]
+        ... 28 common frames omitted
+
+```
