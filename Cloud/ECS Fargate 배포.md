@@ -66,14 +66,14 @@ aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS
 Docker 이미지 빌드:
 
 ```bash
-docker build -t springboot-demo .
+docker build -t on-the-look .
 ```
 
 ECR용 태그 추가 & 푸시:
 
 ```bash
-docker tag springboot-demo:latest 123456789012.dkr.ecr.ap-northeast-2.amazonaws.com/springboot-demo:latest
-docker push 123456789012.dkr.ecr.ap-northeast-2.amazonaws.com/springboot-demo:latest
+docker tag on-the-look:latest 789909227789.dkr.ecr.ap-northeast-2.amazonaws.com/on-the-look
+docker push 789909227789.dkr.ecr.ap-northeast-2.amazonaws.com/on-the-look
 ```
 
 ---
