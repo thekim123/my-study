@@ -1,4 +1,3 @@
-좋아, AWS CLI 로그인 도와줄게!  
 보통 로그인이라고 할 때는 **AWS CLI에 자격증명(Access Key)을 등록해서 인증하는 것**을 말해.  
 즉, 콘솔처럼 ID/PW로 로그인하는 게 아니라, **Access Key + Secret Key 조합**으로 CLI에 등록하는 방식이야.
 
@@ -74,9 +73,6 @@ aws sts get-caller-identity
 }
 ```
 
-이렇게 나오면 성공이야! 🎉
+이렇게 나오면 성공! 🎉
 
 ---
-
-필요하면 ECR 로그인이나 ECS 관련 CLI도 바로 이어서 알려줄게.  
-지금 어디까지 됐어? `aws configure` 했어?
