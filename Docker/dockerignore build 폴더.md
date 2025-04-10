@@ -1,6 +1,3 @@
-🎯 정답 도출!  
-맞아, 지금 에러 원인은 거의 확실하게:
-
 > **`.dockerignore` 파일에 `build/` 폴더가 포함되어 있어서**  
 > Docker가 `build/libs/look-0.0.1-SNAPSHOT.jar` 파일을 **컨텍스트에 포함하지 않음** → COPY 실패
 
@@ -19,31 +16,9 @@ build/
 
 ---
 
-## ✅ 해결 방법 2가지 중 택 1
+## ✅ 해결 방법
 
----
-
-### ✔ 방법 1: `.dockerignore`에서 `build/`를 **일시적으로 제거**
-
-**간단하게 해결 가능**  
-단점: 나중에 불필요한 빌드 캐시들이 이미지에 들어갈 수 있음
-
-```dockerignore
-# .dockerignore 수정 전
-build/  ❌ (삭제하거나 주석 처리)
-
-# 수정 후
-.gradle
-.git
-.gitignore
-Dockerfile
-README.md
-*.iml
-```
-
----
-
-### ✔ 방법 2: 다단계 빌드(Multi-stage)로 해결 (보통은 나중에 적용)
+### ✔ 다단계 빌드(Multi-stage)로 해결 (보통은 나중에 적용)
 
 `.dockerignore`에 build가 있어도, Gradle로 jar 빌드도 Docker 안에서 하면 `.dockerignore`에 영향 안 받아.
 
