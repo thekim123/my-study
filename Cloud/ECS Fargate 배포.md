@@ -114,18 +114,3 @@ docker push 123456789012.dkr.ecr.ap-northeast-2.amazonaws.com/springboot-demo:la
     
 
 ---
-
-## 5️⃣ (다음 단계) CI/CD 자동화
-
-다 만들고 접속까지 확인되면, → GitHub Actions에서 `ECR push + ECS deploy`까지 도전하면 돼.
-
----
-
-필요하면 지금 진행 단계 알려줘.
-
-- Dockerfile 만드는 중인지
-    
-- ECR 푸시까지 했는지
-    
-- ECS 콘솔 설정하면서 막히는 부분 있는지  
-    하나씩 같이 하자! 🙌
