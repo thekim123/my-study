@@ -60,7 +60,7 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
 🔐 먼저 AWS CLI 로그인:
 
 ```bash
-aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 123456789012.dkr.ecr.ap-northeast-2.amazonaws.com
+aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 789909227789.dkr.ecr.ap-northeast-2.amazonaws.com/on-the-look
 ```
 
 Docker 이미지 빌드:
