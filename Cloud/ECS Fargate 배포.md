@@ -73,6 +73,9 @@ ECR용 태그 추가 & 푸시:
 
 ```bash
 docker tag on-the-look:latest 789909227789.dkr.ecr.ap-northeast-2.amazonaws.com/on-the-look
+```
+
+```bash
 docker push 789909227789.dkr.ecr.ap-northeast-2.amazonaws.com/on-the-look
 ```
 
