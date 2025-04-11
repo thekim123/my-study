@@ -25,7 +25,11 @@ ENTRYPOINT ["java", "-jar", "app/app.jar"]
 ## ✅ 이름 붙여서 스테이지 재사용할 수도 있음
 
 ```dockerfile
-`FROM gradle:8.5-jdk21-alpine AS builder # 빌드 작업...  FROM eclipse-temurin:21-jre-alpine COPY --from=builder /app/build/libs/*.jar /app/app.jar`
+FROM gradle:8.5-jdk21-alpine AS builder
+# 빌드 작업...  
+FROM eclipse-temurin:21-jre-alpine
+COPY --from=builder /app/build/libs/*.jar /app/app.jar
 ```
 
-→ `COPY --from=builder`는 **이름 붙인 스테이지에서 결과물 가져오는 것**
+`COPY --from=builder`와 같이 사용하여 재사용할 수 있다. 이 경우 **이름 붙인 스테이지에서 결과물 가져오는 것**이다.
+
