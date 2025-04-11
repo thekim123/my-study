@@ -47,11 +47,11 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
     
 2. 퍼블릭/프라이빗 중 **프라이빗** 선택
     
-3. 이름은 `springboot-demo` 같은 걸로
+3. 이름은 `on-the-look`
     
 
 생성되면 ECR 주소가 나와:  
-예) `123456789012.dkr.ecr.ap-northeast-2.amazonaws.com/springboot-demo`
+`789909227789.dkr.ecr.ap-northeast-2.amazonaws.com/on-the-look`
 
 ---
 
