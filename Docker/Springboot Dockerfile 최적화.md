@@ -39,7 +39,6 @@ RUN $JAVA_HOME/bin/jlink \
     - `--add-modules ALL-MODULE-PATH`: 모든 모듈 포함 (최적화 여지 있음)
     - `--compress=2`: 압축
     - 결과는 `/jre` 디렉토리에 생성됨
-        
 
 ---
 
