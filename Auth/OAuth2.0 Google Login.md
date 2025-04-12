@@ -141,3 +141,139 @@ Spring이 자동으로 구글 로그인 페이지로 보내고 인증 흐름을 
 OAuth2를 사용하려면 **클라이언트 ID를 만들기 전에** 무조건 "OAuth 동의 화면"부터 먼저 설정해야 돼.
 
 ---
+
+
+**백엔드(Spring Security)**가 **구글 로그인 전체를 처리**하는 구조로 가보자.
+그럼 `oauth2Login()` 기반으로 **백엔드에서 인가 코드 받기부터 access token 교환, 유저 정보 조회까지** 전부 처리하는 걸로 가자.
+
+---
+
+## ✅ 목표 구조 (백엔드가 다 처리)
+
+1. 프론트는 로그인 버튼만 있음 → 백엔드에 요청
+    
+2. 백엔드가 **구글 로그인 페이지로 리디렉션**
+    
+3. 사용자가 구글 로그인하면, **구글이 백엔드에 인가 코드 전달**
+    
+4. 백엔드가 **access token 받고 userinfo 조회**
+    
+5. 백엔드에서 JWT 발급 → 프론트에 전달 (or 세션 유지)
+    
+
+---
+
+## ✅ Step-by-step 구성
+
+### 1. `application.yml` 설정
+
+```yaml
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: YOUR_CLIENT_ID
+            client-secret: YOUR_CLIENT_SECRET
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope:
+              - profile
+              - email
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://oauth2.googleapis.com/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+```
+
+---
+
+### 2. 로그인 URL
+
+**프론트엔드는 이 링크로 리디렉트만 시키면 됨**
+
+```
+GET /oauth2/authorization/google
+```
+
+---
+
+### 3. 유저 정보를 처리할 서비스
+
+```java
+@Service
+public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+    @Override
+    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+        OAuth2User oauth2User = new DefaultOAuth2UserService().loadUser(userRequest);
+
+        // 여기에 유저 정보 DB 저장 or 회원가입 로직
+        System.out.println("Google user info: " + oauth2User.getAttributes());
+
+        return oauth2User; // 나중엔 커스텀 UserPrincipal로 바꾸는 게 좋아
+    }
+}
+```
+
+---
+
+### 4. 시큐리티 설정
+
+```java
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/", "/login**", "/css/**", "/js/**").permitAll()
+                .anyRequest().authenticated()
+            )
+            .oauth2Login(oauth2 -> oauth2
+                .userInfoEndpoint(userInfo -> userInfo
+                    .userService(new CustomOAuth2UserService()) // 위에서 만든 서비스
+                )
+                // 로그인 성공 후 처리
+                .successHandler((request, response, authentication) -> {
+                    // 여기서 JWT 발급 가능
+                    System.out.println("OAuth2 Login Success");
+                    response.sendRedirect("/home"); // 또는 토큰 포함해서 프론트에 전달
+                })
+            );
+
+        return http.build();
+    }
+}
+```
+
+---
+
+### 5. JWT 발급이 필요하다면?
+
+로그인 성공 핸들러 안에서 `authentication.getPrincipal()`로 유저 정보 꺼내서 JWT 발급하면 돼.
+
+```java
+OAuth2User user = (OAuth2User) authentication.getPrincipal();
+String email = user.getAttribute("email");
+String token = jwtProvider.createToken(email);
+response.setHeader("Authorization", "Bearer " + token);
+```
+
+---
+
+## ✅ 정리하자면
+
+|할 일|방식|
+|---|---|
+|구글 로그인 화면 띄우기|프론트가 `/oauth2/authorization/google`로 리디렉트|
+|인가 코드 처리|Spring이 자동 처리|
+|access token → 유저 정보 조회|`CustomOAuth2UserService`에서 처리|
+|로그인 성공 후 작업|`.successHandler()`에서 JWT 발급 등 처리|
+
+---
+
+필요하면 이걸 기반으로 DTO 설계나, JWT 발급 유틸, 리프레시 토큰 구현도 같이 가이드해줄게.  
+**이 구조로 가고 싶다** 확정이면, 내가 전체 뼈대를 zip 파일처럼 정리해줄 수도 있어. 계속 같이 가보자!
