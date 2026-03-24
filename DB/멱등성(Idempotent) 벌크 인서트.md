@@ -1,33 +1,26 @@
 상황은 이렇다.
 (게시글ID, 이미지이름)을 PK로 둔 테이블이 있다. 이 테이블에 이 이미지에 대한 검색 순위같은걸 저장하는 것인데, Insert할 때 주민등록번호로 하다보니 가끔 이미지이름이 같은 것이 들어가면서 Duplicated Key Exception이 발생하는 이슈이다. 
 
-사실 같은 사람이면 이 사람의 가장 높은 순위인 row가 필요한 것이기 때문에 멱등 쿼리를 사용해서 insert했다. 고려했던 다른 하나는 insert할 때 
-
+사실 같은 사람이면 이 사람의 가장 높은 순위인 row가 필요한 것이기 때문에 멱등 쿼리를 사용해서 insert했다. 고려했던 다른 하나는 insert할 때 이것이 30만건이다 보니 mybatis foreach문에서는 이것을 한번에 수용하지 못했다. 워낙 구버전이다보니 이것에 대해 다른 조치는 불가능했고, 그래서 5000건씩 나눠서 bulk 인서트를 수행하는 방식으로 변경했다.
 
 ## 1. SQL 레벨에서 중복을 무시하기
-
-DB가 MariaDB/MySQL이라면 가장 직접적인 방법이에요.
+DB가 MariaDB/MySQL이라면 가장 직접적인 방법이다.
+LLM에 처음 물어봤을 때 MariaDB/MySQL을 기준으로 알려주었다.
 
 **`INSERT IGNORE`** — UK 위반 시 해당 row를 조용히 skip합니다.
-
 ```sql
 INSERT IGNORE INTO your_table (idx, front, ...) VALUES (?, ?, ...), (?, ?, ...) ...
 ```
 
 **`ON DUPLICATE KEY UPDATE`** — 중복 시 upsert(덮어쓰기)가 필요하면 이쪽.
-
 ```sql
 INSERT INTO your_table (idx, front, ...)
 VALUES (?, ?, ...)
 ON DUPLICATE KEY UPDATE front = VALUES(front)
 ```
 
-Spring Boot에서 MyBatis 쓰고 있으면 mapper XML에서 바로 적용 가능하고, JPA라면 `@Query` nativeQuery로 처리하면 돼요.
-
 ## 2. 애플리케이션 레벨에서 사전 필터링
-
-벌크 인서트 전에 기존 키를 조회해서 중복을 미리 제거하는 방식이에요.
-
+벌크 인서트 전에 기존 키를 조회해서 중복을 미리 제거하는 방식이다. 
 ```java
 // 1) 삽입 대상 키 셋 추출
 Set<CompositeKey> incoming = batch.stream()
@@ -43,40 +36,13 @@ List<Entity> toInsert = batch.stream()
     .toList();
 ```
 
-다만 이건 조회 비용이 추가되고, 조회~삽입 사이 race condition 가능성도 있어서 완벽한 방어는 아니에요.
-
-## 3. 로그 레벨 튜닝 (증상 완화)
-
-근본 해결은 위 1~2번이지만, 당장 로그 폭탄을 줄이려면:
-
-```yaml
-# application.yml
-logging:
-  level:
-    org.hibernate.engine.jdbc.spi.SqlExceptionHelper: ERROR
-    # 또는 MyBatis 쓴다면
-    org.apache.ibatis: WARN
-```
-
-이러면 UK 위반 exception의 SQL 전문이 DEBUG/WARN으로 수만 줄 찍히는 건 막을 수 있어요.
+처음에는 이 방법을 먼저 떠올렸지만, 조회 비용이 추가되고, 조회~삽입 사이 race condition 가능성도 있어서 완벽한 방어는 아니라고 생각했다.
 
 ---
-
-**추천 조합**: `INSERT IGNORE`(또는 `ON DUPLICATE KEY UPDATE`)로 DB 레벨에서 근본 차단 + 로그 레벨 조정으로 이중 방어. 사전 필터링은 데이터 건수가 정말 많아서 DB 부하 자체를 줄여야 할 때 추가하면 돼요.
-
-혹시 JPA로 하고 있는지 MyBatis로 하고 있는지에 따라 구현 방식이 좀 달라지는데, 어떤 쪽이에요?
-
-
----
----
-
-
-오라클이면 접근이 좀 달라지죠. Oracle에서 쓸 수 있는 방법 정리해볼게요.
-
+오라클이면 쿼리가 좀 다르다.
 ## 1. MERGE문 (가장 정석)
 
-중복이면 skip, 없으면 insert — Oracle에서 `INSERT IGNORE` 역할을 하는 패턴이에요.
-
+중복이면 skip, 없으면 insert — Oracle에서 `INSERT IGNORE` 역할을 하는 패턴이다다.
 ```xml
 <insert id="bulkUpsert" parameterType="list">
     <foreach collection="list" item="item" separator="">
@@ -96,9 +62,7 @@ logging:
 `WHEN MATCHED THEN UPDATE` 절을 안 넣으면 중복은 그냥 무시돼요. 에러도 안 나고 로그도 안 남아요.
 
 ## 2. INSERT + WHERE NOT EXISTS
-
 MERGE보다 가볍게 가고 싶으면:
-
 ```xml
 <insert id="bulkInsert" parameterType="list">
     <foreach collection="list" item="item" separator="">
@@ -114,9 +78,7 @@ MERGE보다 가볍게 가고 싶으면:
 ```
 
 ## 3. LOG ERRORS INTO (대량 벌크 특화)
-
-Oracle 고유 기능인데, 에러가 나는 row를 별도 에러 테이블로 빼고 나머지는 정상 처리하는 방식이에요. 수만 건 벌크에서 성능이 제일 좋아요.
-
+Oracle 고유 기능인데, 에러가 나는 row를 별도 에러 테이블로 빼고 나머지는 정상 처리하는 방식이에요. 수만 건 벌크에서 성능이 제일 좋다고 한다. 나는 이렇게까지는 필요가 없었다. 이 insert 작업이 비즈니스에서 중요한 비중을 차지하고 있지도 않았고 그저 맨 윗순이만 뽑아서 저장하면 그만인 상황이었다.
 ```sql
 -- 1) 에러 테이블 먼저 생성 (1회)
 BEGIN
@@ -140,26 +102,13 @@ END;
 </insert>
 ```
 
-UK 위반 row는 `your_table_err_log`에 조용히 들어가고, 정상 row는 그대로 insert돼요. 애플리케이션 로그에는 아무것도 안 찍혀요.
+UK 위반 row는 `your_table_err_log`에 조용히 들어가고, 정상 row는 그대로 insert 된다. 애플리케이션 로그에는 아무것도 안 찍힌다.
 
----
-
-**상황별 추천**:
-
-- **건수 적고 단순하게** → `MERGE` (안전하고 직관적)
-- **진짜 대량 벌크 (수만~수십만)** → `LOG ERRORS INTO` (성능 최고, 에러 추적도 가능)
-- **중복 row를 나중에 분석해야 하면** → `LOG ERRORS INTO`가 에러 테이블에 남겨주니까 딱 맞고
-
-지금 벌크 인서트 건수가 대략 어느 정도 되는 상황이에요?
-
-
----
 ---
 솔직히 지금 상황(중복 skip만 하면 되는 경우)에선 둘 다 잘 동작하는데, 차이가 있긴 해요.
 
 ## MERGE가 더 나은 점
-
-**원자성이 보장돼요.** MERGE는 USING절의 데이터와 대상 테이블을 매칭하는 게 하나의 연산이라, 동시에 같은 키로 insert가 들어와도 UK 위반이 안 생겨요.
+**원자성이 보장된다.** MERGE는 USING절의 데이터와 대상 테이블을 매칭하는 게 하나의 연산이라, 동시에 같은 키로 insert가 들어와도 UK 위반이 안 생겨요.
 
 반면 `INSERT + WHERE NOT EXISTS`는 SELECT 시점과 INSERT 시점 사이에 미세한 틈이 있어서, 동시 요청이 들어오면 둘 다 "없네?" 하고 insert 시도 → UK 위반이 발생할 수 있어요.
 
